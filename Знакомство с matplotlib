@@ -1,0 +1,43 @@
+6.9 Знакомство с matplotlib
+5 из 5 шагов пройдено
+from matplotlib import pyplot as plt
+import pandas as pd
+from random import random
+dev_x = [*range(25, 36)]
+dev_y = [round((random())*10000)*(i**2+1) for i in range(11)]
+py_dev_y = [round((random())*10000)*(i+1) for i in range(11)]
+ 
+
+# print(plt.style.available)
+plt.style.use('classic')
+plt.plot(dev_x, dev_y, color='black', marker='.', linestyle = '--', linewidth = 3, label = 'All Devs')
+plt.plot(dev_x, py_dev_y, label = 'Py Devs')
+plt.xlabel('Ages')
+plt.ylabel('Media Salary')
+plt.title('Media Salary by Age')
+plt.legend()
+plt.grid()
+plt.savefig('result.png')
+plt.show()
+ 
+
+df = pd.read_csv('https://raw.githubusercontent.com/HaykInanc/urfu_data/master/weather.csv')
+ 
+
+df.date = pd.to_datetime(df['date'], format='%d.%m.%Y')
+df['month'] = df.date.dt.month
+ 
+
+moscow = df[df.city == 'Москва'].temperature
+yekaterinburg = df[df.city == 'Екатеринбург'].temperature
+yerevan = df[df.city == 'Ереван'].temperature
+months = df.month.unique()
+ 
+
+plt.plot(months, moscow, label = 'Москва')
+plt.plot(months, yekaterinburg, label = 'Екатеринбург')
+plt.plot(months, yerevan, label = 'Ереван')
+plt.xlabel('months')
+plt.ylabel('temperature')
+plt.legend()
+plt.grid()
